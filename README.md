@@ -10,7 +10,7 @@ Update you mix file:
 
   defp deps do
     [
-      {:ex_data_hoover, git: "https://github.com/jobteaser/ex_data_hoover.git"}
+      {:ex_data_hoover, "~> 0.1.0"}
     ]
   end
 
