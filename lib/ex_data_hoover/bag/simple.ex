@@ -9,9 +9,6 @@ defmodule ExDataHoover.Bag.Simple do
   end
 
   def wrap(payload) do
-    case Enum.into(payload, %{}) do
-      results = %{} -> {:ok, results}
-      nil -> {:error, "There is no payload"}
-    end
+    {:ok, Enum.into(payload, %{})}
   end
 end

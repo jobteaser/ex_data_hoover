@@ -13,8 +13,8 @@ defmodule ExDataHoover.Bag do
   @callback wrap(
               trackee_id: any,
               trackee: any,
-              traits: Map.t(),
+              traits: map,
               event: String.t(),
-              properties: Map.t()
+              properties: map
             ) :: {:ok, any} | {:error, String.t()}
 end

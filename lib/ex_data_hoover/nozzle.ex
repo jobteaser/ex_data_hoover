@@ -48,8 +48,9 @@ defmodule ExDataHoover.Nozzle do
   Absorb an `event`, `trackee`, and `props`.
   The implementation will call the `bag.wrap` under the hood.
   """
-  @spec absorb(atom, trackee: any, event: String.t(), props: Map.t()) :: {:ok}
-  def absorb(name \\ __MODULE__, trackee: trackee, event: event, props: props) do
+  @spec absorb(atom(), [{:event, any()} | {:props, any()} | {:trackee, any()}, ...]) :: :ok
+  def absorb(name \\ __MODULE__, trackee: trackee, event: event, props: props)
+      when is_atom(name) do
     GenServer.cast(name, {:absorb, trackee: trackee, event: event, props: props})
   end
 
@@ -59,7 +60,7 @@ defmodule ExDataHoover.Nozzle do
   The implementation is identical as the `absorb function` but it will return
   the `bag.wrap` result.
   """
-  @spec sync_absorb(atom, trackee: any, event: String.t(), props: Map.t()) ::
+  @spec sync_absorb(atom, trackee: any, event: String.t(), props: map) ::
           {:ok, any} | {:error | any}
   def sync_absorb(name \\ __MODULE__, trackee: trackee, event: event, props: props) do
     GenServer.call(name, {:sync_absorb, trackee: trackee, event: event, props: props})
